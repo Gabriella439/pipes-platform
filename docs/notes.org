@@ -1,0 +1,1118 @@
+#+TITLE: haskell notes
+#+OPTIONS: toc:2 num:nil ^:nil
+
+Haskell-Pipes learnings and toolkit notes
+
+* haskell fresh install
+
+- [X] list core packages to reinstall
+
+cabal
+cabal-dev
+hoogle
+hasktags
+hdevtools
+hlint
+pointfree
+QuickCheck
+
+- [X] uninstall via `uninsall-hs`
+
+#+begin_src sh
+sudo uninstall-hs thru 7.6.3 --remove
+sudo rm /Library/Haskell/*
+sudo rmdir /Library/Haskell
+#+end_src
+
+
+- [X] check haskell library exists in $PATH
+
+  #+begin_src sh
+  export PATH="$HOME/Library/Haskell/bin:$PATH"
+  #+end_src
+
+- [X] install haskell platform OS X 2013.2.0.0
+
+http://lambda.haskell.org/platform/download/2013.2.0.0/Haskell%20Platform%202013.2.0.0%2064bit.pkg
+
+file:///Library/Haskell/doc/start.html
+
+starting pack
+
+#+begin_example
+/Library/Haskell packages
+
+GLURaw-1.3.0.0
+GLUT-2.4.0.0
+HTTP-4000.2.8
+HUnit-1.2.5.2
+OpenGL-2.8.0.0
+OpenGLRaw-1.3.0.0
+QuickCheck-2.6
+alex-3.0.5
+async-2.0.1.4
+attoparsec-0.10.4.0
+cabal-install-1.16.0.2
+case-insensitive-1.0.0.1
+cgi-3001.1.7.5
+fgl-5.4.2.4
+happy-1.18.10
+hashable-1.1.2.5
+haskell-platform-2013.2.0.0
+haskell-src-1.0.1.5
+html-1.0.1.2
+mtl-2.1.2
+network-2.4.1.2
+parallel-3.2.0.3
+parsec-3.1.3
+primitive-0.5.0.1
+random-1.0.1.1
+regex-base-0.93.2
+regex-compat-0.95.1
+regex-posix-0.95.2
+registrations
+split-0.2.2
+stm-2.4.2
+syb-0.4.0
+text-0.11.3.1
+transformers-0.3.0.0
+unordered-containers-0.2.3.0
+vector-0.10.0.1
+xhtml-3000.2.1
+zlib-0.5.4.1
+
+#+end_example
+
+post- cabal-dev install
+
+- [X] install core libraries
+
+  #+begin_src sh
+  cabal install cabal-install --haddock-hyperlink-source -p
+  cabal update
+  cabal install cabal-dev --haddock-hyperlink-source -p
+  #+end_src
+
+#+begin_example
+/Library/Frameworks/GHC.framework/Versions/7.6.3-x86_64/usr/lib/ghc-7.6.3/package.conf.d:
+    Cabal-1.16.0
+    GLURaw-1.3.0.0
+    GLUT-2.4.0.0
+    HTTP-4000.2.8
+    HUnit-1.2.5.2
+    OpenGL-2.8.0.0
+    OpenGLRaw-1.3.0.0
+    QuickCheck-2.6
+    array-0.4.0.1
+    async-2.0.1.4
+    attoparsec-0.10.4.0
+    base-4.6.0.1
+    bin-package-db-0.0.0.0
+    binary-0.5.1.1
+    bytestring-0.10.0.2
+    case-insensitive-1.0.0.1
+    cgi-3001.1.7.5
+    containers-0.5.0.0
+    deepseq-1.3.0.1
+    directory-1.2.0.1
+    fgl-5.4.2.4
+    filepath-1.3.0.1
+    (ghc-7.6.3)
+    ghc-prim-0.3.0.0
+    hashable-1.1.2.5
+    haskell-platform-2013.2.0.0
+    haskell-src-1.0.1.5
+    (haskell2010-1.1.1.0)
+    (haskell98-2.0.0.2)
+    hoopl-3.9.0.0
+    hpc-0.6.0.0
+    html-1.0.1.2
+    integer-gmp-0.5.0.0
+    mtl-2.1.2
+    network-2.4.1.2
+    old-locale-1.0.0.5
+    old-time-1.1.0.1
+    parallel-3.2.0.3
+    parsec-3.1.3
+    pretty-1.1.1.0
+    primitive-0.5.0.1
+    process-1.1.0.2
+    random-1.0.1.1
+    regex-base-0.93.2
+    regex-compat-0.95.1
+    regex-posix-0.95.2
+    rts-1.0
+    split-0.2.2
+    stm-2.4.2
+    syb-0.4.0
+    template-haskell-2.8.0.0
+    text-0.11.3.1
+    time-1.4.0.1
+    transformers-0.3.0.0
+    unix-2.6.0.1
+    unordered-containers-0.2.3.0
+    vector-0.10.0.1
+    xhtml-3000.2.1
+    zlib-0.5.4.1
+
+/Users/tonyday/.ghc/x86_64-darwin-7.6.3/package.conf.d:
+    setenv-0.1.0
+    tar-0.4.0.1
+
+#+end_example
+
+
+  
+
+
+
+
+* travis
+
+before_install:
+ - sudo apt-get update -qq
+ - sudo apt-get install -qq [packages list]
+
+create submodule setup:
+
+#+begin_src sh
+git submodule add -b master https://github.com/Gabriel439/Haskell-Pipes-Library.git deps/pipes
+git submodule add -b master https://github.com/Gabriel439/Haskell-Pipes-Safe-Library.git deps/pipes-safe
+git submodule add -b 4.0.0 https://github.com/Gabriel439/Haskell-Pipes-Concurrency-Library.git deps/pipes-concurrency
+git submodule add -b pipes-4.0 https://github.com/k0001/pipes-network.git deps/pipes-network
+git submodule update --remote
+
+#+end_src
+
+
+#+begin_src sh :tangle test-travis.sh
+cabal install ../deps/pipes --dry-run
+cabal install ../deps/pipes-safe --dry-run
+cabal install ../deps/pipes-concurrency --dry-run
+cabal install ../deps/pipes-network --dry-run
+#+end_src
+
+* learnings
+
+ meta tutorial http://acm.wustl.edu/functional/haskell.php
+
+ examples http://acm.wustl.edu/functional/hs-breads.php
+
+ cheat sheet  http://blog.codeslower.com/static/CheatSheet.pdf
+
+ https://github.com/bos/stanford-cs240h/blob/master/notes/l1/basics.md
+
+ exercises http://www.haskell.org/haskellwiki/99_questions/1_to_10
+
+ https://jeltsch.wordpress.com/2013/02/09/some-interesting-features-of-haskells-type-system/
+
+ http://dev.stephendiehl.com/hask/
+
+
+
+** breadcrumbs
+
+
+#+begin_src haskell
+naturals = [1..]
+--This constructs an infinite list with the first term of 1,
+--the pattern being that the next term will be 1+ the previous list term (the default pattern).
+
+even_numbers = [0,2..]
+--This constructs an infinite list with the first two terms of 0 and 2.
+--Between these first two terms, a pattern of adding 2 to each successive term is noted.
+--The rest of the list is constructed using this pattern, adding 2 to each term to get the next.
+
+even_numbers' = map (*2) naturals
+--This function maps the operation (*2) to the list naturals,
+--constructing a list where each value is 2 times that of the corresponding value in naturals.
+
+odd_numbers = map (+1) even_numbers
+--This function maps the operation (+1) to the list even_numbers,
+--constructing a list in which each value is one more than that of the corresponding value in even_numbers.
+
+
+-- List Comprehensions
+
+-- an alternate way of expressing lists
+
+naturals = [ x | x <- [1..] ]
+
+perfect_squares = [ x*x | x <- naturals ]
+
+multiples_of_3 = [ x | x <- naturals, x `mod` 3 == 0 ]
+
+all_pairs = [ (x,y) | x <- [1..10], y <- [1..10] ]
+
+
+-- Currying
+
+-- partial application of functions
+
+add a b = a+b
+
+add3 = add 3
+
+multiples_of n = [n,n*2..]
+
+multiples_of_43 = multiples_of 43
+
+
+-- Lists
+
+lst   = 1 : 2 : 3 : 4 : []
+lst'  = [1,2,3,4]
+lst'' = 1 : [2,3,4]
+
+foo  = [1,2] ++ [3,4]
+foo' = [1,2,3] ++ [4]
+
+inf_ones   = 1 : inf_ones
+inf_ones'  = [1,1..]
+inf_ones'' = [1] ++ inf_ones
+
+first lst = head lst
+rest lst  = tail lst
+
+nth_index n lst = lst !! n
+last lst = lst !! (length lst)
+
+10_elems lst = take 10 lst
+11_and_beyond lst = drop 10 lst
+
+
+-- Advanced Infinite Lists
+
+-- a bit of a challenge maybe, but you should understand this before you get too deep
+fib = 1 : 1 : map (\(a,b) -> a + b) (zip fib (tail fib))
+
+
+-- Composition
+
+import Data.List (sort)
+
+min_n n = (take n) . sort
+
+descending_sort lst = (reverse . sort) lst
+
+
+-- Function Application Operator
+
+-- the name is scary, the actual thing is not
+
+add = (+)  -- (+) is the way to refer to the + as a regular (not special & infix) function
+divide = (/)
+
+foo = add 2 (divide 4 5)
+foo' = add 2 $ divide 4 5
+
+{-
+the idea is that blah $ foo bar baz is shorthand for blah (foo bar baz)
+it's a way to save parenthesis :-)
+-}
+
+
+
+
+-- Pattern Matching
+
+fact 0 = 1
+fact n = n * fact (n-1)
+
+len [] = 0
+len lst = 1 + len (tail lst)
+
+len' [] = 0
+len' (x:xs) = 1 + len xs
+
+foo "hello" = "asdf"
+foo "world" = "BALOONS"
+foo _       = "CHUNKY BACON"
+
+
+-- At Patterns
+
+foo allxs@(x:xs) = "All xs are: " ++ (show allxs) ++ "\n"
+                   ++ "The first x is: " ++ (show x) ++ "\n"
+                   ++ "The rest of the xs are: " ++ (show xs)
+
+{- usage (ghci):
+*Main> putStrLn $ foo [1,2,3,4]
+All xs are: [1,2,3,4]
+The first x is: 1
+The rest of the xs are: [2,3,4]
+-}
+
+
+
+
+-- Guards
+
+-- guards are a lot like pattern matching
+foo n | n < 0 = "negative"
+      | n == 0 = "zero"
+      | otherwise = "positive"
+
+
+-- Case
+
+foo n = case signum n of 
+	(-1) -> "negative"
+	0 -> "zero"
+	1 -> "positive"
+
+
+-- Where
+
+
+max_list lst = head rslst where
+    rslst = reverse slst
+    slst = sort lst
+
+chocolate pie = delicious pie where
+    delicious = (++) "your mom's "
+
+
+-- Tuples
+
+
+min_max_list lst = (head slst, head rslst) where
+    rslst = reverse slst
+    slst = sort lst
+
+magnitude (x,y) = sqrt (x^2 + y^2)
+
+pythagorean_triples = [(a,b,c) | c <- [1..],
+                                 a <- [1..c],
+                                 b <- [a..c],
+                                 a^2 + b^2 == c^2]
+
+
+-- Rpn
+
+-- ignore the parts that haven't been explained yet, and come back to it later
+-- the things to ignore are noted
+
+rpn :: String -> [Int] -- ignore this
+rpn str = foldr stackSolve [] (reverse (words str)) -- you probably don't know what foldr means yet (but you might!)
+  where stackSolve :: String -> [Int] -> [Int]
+        stackSolve [] _ = []
+        stackSolve word stack = case word of
+          "+" -> binOp (+) stack
+          "-" -> binOp (-) stack
+          "*" -> binOp (*) stack
+          "/" -> binOp div stack
+          "%" -> binOp mod stack
+          _   -> (read word) : stack
+        binOp _ [] = error "Stack underflow (0 items on stack, binOp)"
+        binOp _ (x:[]) = error "Stack underflow (1 item on stack, binOp)"
+        binOp f (x:y:xs) = ((flip f) x y) : xs   -- flip takes a function of two arguments and reverse their order
+     
+              
+
+
+-- Lambdas
+
+-- we can define functions on the fly with lambas
+-- their use will make more sense later on
+
+
+foo f x y = f x y
+callFoo = foo (\a b -> a + b) 1 2 
+-- we define an anonymous function that 
+-- takes arguments a and b, and adds them together
+-- and we call it right away with arguments 1 and 2
+
+
+-- a good example uses map from the standard library, which
+-- applies a function to everything in a list
+addOneToEverything lst = map (\a -> a + 1) lst
+
+
+
+-- Closures
+
+-- using closures to make "objects"
+num a = \cmd b -> case cmd of
+                     "plus" -> a + b
+                     "minus" -> a - b
+                     "times" -> a * b
+                     "divided by" -> a / b
+
+{- gchi session: -------------
+
+*Main> let three = num 3
+*Main> three "plus" 2
+5.0
+*Main> three "times" 11
+33.0
+-}
+
+- Data
+
+-- This makes a Vector type that has three Int-type fields
+data Vector = ConstructorName Int Int Int
+
+ -- the constructor name can be the same as the type name if we want
+data Vec = Vec Int Int Int
+
+-- we can also have multiple constructors
+-- note that the constructor really determines a lot more about
+-- the structure than a "constructor" does in C++/Java
+data PolyVec = R2 Int Int           -- R2 is the set of points in the plane, but we're using it as the name of a constructor for 2d vectors
+             | R3 Int Int Int       -- R3 is 3d space
+             | R4 Int Int Int Int  
+
+
+-- we can pattern match of data types to extract their fields
+-- also, notice how on the left (ConstructorName x y z) is a pattern match
+-- while on the right, it's actually calling the constructor like a function to return a new Vector
+vectorPlus (ConstructorName a b c) (ConstructorName d e f) = (ConstructorName (a+d) (b+e) (c+f))
+
+
+-- this function is identical to the constructor function that the data statement generates for us
+makeVector x y z = ConstructorName x y z
+
+-- we could even write
+makeVector' = ConstructorName
+
+
+-- lastly an example of pattern matching on PolyVec constructors
+project (R2 x y) = R3 x y 0
+project (R3 x y z) = R4 x y z 0
+
+
+- Enumerated Types
+
+data EnumeratedType = Foo | Bar | Baz
+
+func Foo = "Got a foo!"
+func Bar = "Got a bar!"
+func Baz = "Got a baz!"
+
+func' enum = case enum of
+               Foo -> "Got a foo!"
+               Bar -> "Got a bar!"
+               Baz -> "Got a baz!"
+
+decide n | n < 0 = Foo
+         | n == 0 = Bar
+         | otherwise = Baz
+             
+run = func . decide
+run' = func' . decide
+{- example usage in ghci:
+run (-1)   -- you need the parens to distinguish the negative number from a partial application of the (-) function
+run 0
+run 1
+run 10
+-}
+
+
+-- Type
+
+-- every function has a type
+add :: Int -> Int -> Int
+add a b = a + b
+
+
+-- in general, this is more like the following (not valid haskell code)
+foo :: InputType -> OutputType
+
+-- or for a function of five arguments (as an example)
+bar :: InputType1 -> InputType2 -> InputType3 -> InputType4 -> InputType5 -> OutputType
+
+-- or a function of no arguments!
+baz :: OutputType
+
+
+-- for instance
+name = "Joe Schmoe" -- this is a function! really!
+
+
+-- Type Classes
+
+-- a type class in Haskell is a bit like an interface in Java
+--(think of a as a type-parameter, like the Foo in "public class Blah implements Comparable<Foo>"
+
+
+-- the below is simplified, but valid
+class Mathy a where
+  add :: a -> a -> a
+  times :: a -> a -> a
+  
+
+
+-- now we can make data types that are instances of Num, meaning they have to implement the functions that Num specifies
+
+data Vector = Vector Int Int Int
+instance Mathy Vector where
+    add (Vector a b c) (Vector x y z) = Vector (a+x) (b+y) (c+z)
+    times (Vector a b c) (Vector x y z) = Vector (a*x) (b*y) (c*z) -- this isn't real vector multiplication but who cares
+
+
+
+
+
+
+-- Type Classes Again
+
+-- here we give our class a type parameter
+class Useless a where
+    func :: a -> String
+    func arg = ""  -- we also give it a (not-very-helpful) default implementation
+
+data Thing = Thing String Int
+instance Useless Thing -- since we have a default func, we don't have to specify one
+
+
+
+-- lastly, there are a lot of built in type classes
+data Pair = Pair Int Int
+
+-- An example is Show; things that are instanced of show
+-- can be turned into Strings
+
+-- a quick example of using Show (the method show forces things to implement is called "show")
+-- notice that the numbers are instances of Show and we use that to turn them into strings here
+pairToString (Pair x y) = "(" ++ (show x) ++ "," ++ (show y) ++ ")"
+
+
+-- now that we have a function to turn pairs into strings we can actually just make pair an instance of Show
+instance Show Pair where
+    show = pairToString
+
+
+-- now we could say
+turnMyPairIntoAString pair = show pair
+-- or
+aPairAsAString = show (Pair 23 14)
+
+
+
+
+-- The Other Meaning Of Type
+
+type Name = String
+-- this aliases Name to be a special kind of String
+
+
+-- for instance:
+whatsMyName :: Name  -- remember type specifications?
+whatsMyName = "Sasquatch"
+
+
+
+
+-- More Currying
+
+-- all of these are equivalent!
+f a b = a + b
+f' a = \b -> a + b
+f'' = \a b -> a + b
+f''' = \a -> \b -> a + b
+
+
+-- Newtype As A Wrapper
+
+-- try to understand this, it's a pretty common pattern when using and defining some monads
+
+newtype State s a = State { runState :: (s -> (a,s)) } 
+
+
+-- Bind
+
+{- >>= is often called "bind" and is one of the required functions in the Monad typeclass -}
+
+
+f >>= g
+-- is equivalent to
+do
+   a <- f
+   g a
+-- and to
+ f >>= (\a -> g a)
+
+-- and also that
+f >> g
+-- is equivalent to
+_ <- f
+g
+-- and to
+f >>= (\_ -> g)
+
+
+-- List Monad
+
+-- things that are equivalent because of list monad behavior
+map (+1) [1,2,3,4]
+liftM (+1) [1,2,3,4]
+
+
+
+
+-- List Monad Two
+
+-- equivalent due to the list monad
+
+[1,2,3] >>= \x -> ([4,5,6] >>= \y -> return (x,y))
+concatMap (\x -> concatMap (\y -> [(x,y)]) [4,5,6]) [1,2,3]
+
+
+-- Custom State Monad
+
+-- Based on the code at the Gentle Introducton to Haskell tutorial
+-- here: http://www.haskell.org/tutorial/monads.html
+
+type S = String
+
+data SM a = SM (S -> (a,S))  -- The monadic type
+
+instance Monad SM where
+  -- defines state propagation
+  SM c1 >>= fc2         =  SM (\s0 -> let (r,s1) = c1 s0 
+                                          SM c2 = fc2 r in
+                                         c2 s1)
+  return k              =  SM (\s -> (k,s))
+
+ -- extracts the state from the monad
+readSM                  :: SM S
+readSM                  =  SM (\s -> (s,s))
+
+ -- updates the state of the monad by applying 'f'
+updateSM                :: (S -> S) -> SM ()  -- alters the state
+updateSM f              =  SM (\s -> ((), f s)) 
+
+-- run a computation in the SM monad
+runSM                   :: S -> SM a -> (a,S)
+runSM s0 (SM c)         =  c s0
+
+
+
+
+doSomething = do
+	updateSM ((flip (++)) " world")
+	
+main = do
+	let (_, thing) = runSM "hello" doSomething
+	putStrLn thing
+
+
+-- Statet
+
+-- Taken verbatim from: http://www.haskell.org/pipermail/libraries/2005-April/003558.html
+-- Thanks, "isaac"
+
+import Control.Monad.State
+
+type MyState a = StateT Int IO a
+
+stateFun :: MyState String
+stateFun = do 
+  modify (+100)
+  liftIO (putStrLn "Hello!")
+  return "foo"
+
+main = do
+  (s, n) <- runStateT (stateFun >> stateFun) 0
+  putStrLn $ "n: " ++ (show n) ++ " s: " ++ s
+
+#+end_src
+
+** practical coding
+
+http://www.haskellforall.com/2012/08/code-example-1.html
+
+
+
+
+
+* reference
+
+http://packdeps.haskellers.com/reverse
+
+http://yogsototh.github.io/Category-Theory-Presentation/#slide-81
+
+https://www.fpcomplete.com/school/pick-of-the-week/coroutines-for-streaming/part-4-category-and-arrow
+
+http://www.haskell.org/ghc/docs/latest/html/users_guide/flag-reference.html
+
+
+* pipe basics
+
+** Proxy a' a b' b m r
+
+a' - upstream request
+a - upstream response
+b' - downstream request
+b downstream response
+m monad
+r return value ()
+
+
+** Pipe a b = Proxy () a () b
+
+** Effect = Proxy x () () x m r
+
+#+begin_src haskell
+import Pipes
+import qualified Pipes.Prelude as P
+
+echo :: IO ()
+echo = runEffect $ (P.stdin >-> P.stdout) ()
+
+main :: IO ()
+main = echo
+
+#+end_src
+
+
+
+** type list
+
+#+begin_src haskell
+type Producer a   m r = Proxy X  () () a m r
+type Pipe     a b m r = Proxy () a  () b m r
+type Consumer   b m r = Proxy () b  () X m r
+type Effect       m r = Proxy X  () () X m r
+#+end_src
+
+** >->
+
+
+>           b'               c'                     c'
+>           |                |                      |
+>      +----|----+      +----|----+            +----|----+
+>      |    v    |      |    v    |            |    v    |
+>  a' <==       <== b' <==       <== c'    a' <==       <== c'
+>      |    f    |      |    g    |     =      | f >-> g |
+>  a  ==>       ==> b  ==>       ==> c     a  ==>       ==> c
+>      |    |    |      |    |    |            |    |    |
+>      +----|----+      +----|----+            +----|----+
+>           v                v                      v
+>           r                r                      r
+
+
+** \>\
+
+http://www.haskellforall.com/2013/04/pipes-and-io-streams.html
+
+https://groups.google.com/forum/#!topic/haskell-pipes/t2A0U3sF1CM
+
+
+>           b'<======\               c'                     c'
+>           |        \\              |                      |
+>      +----|----+    \\        +----|----+            +----|----+
+>      |    v    |     \\       |    v    |            |    v    |
+>  a' <==       <== y'  \== b' <==       <== y'    a' <==       <== y'
+>      |    f    |              |    g    |     =      | f \>\ g |
+>  a  ==>       ==> y   /=> b  ==>       ==> y     a  ==>       ==> y
+>      |    |    |     //       |    |    |            |    |    |
+>      +----|----+    //        +----|----+            +----|----+
+>           v        //              v                      v
+>           b =======/               c                      c
+>
+
+
+** up \>\ p />/ dn
+
+pattern variations
+
+#+begin_src haskell
+evalStateP x0 $ (up \>\ hoist lift . p />/ dn) ()
+
+stdin />/ stdout:: () -> Effect' IO ()
+
+respond . uppercase />/ stdout :: String -> Effect' IO ()
+
+pull />/ stdout:: () Consumer String IO r
+
+stdin />/ lift . putStrLn
+#+end_src
+
+
+
+
+
+** for examples
+#+begin_src haskell
+runEffect $ for (P.stdin >>~ P.takeWhile (/= "quit")) P.stdout
+
+-- Print a list
+runEffect $ for (each [1..10]) P.print
+
+-- Build a ListT
+pairs :: ListT IO (Int, Int)
+pairs = do
+     x <- select $ each [1..3]
+     lift $ putStrLn $ "x = " ++ show x
+     y <- select $ each [4..6]
+     lift $ putStrLn $ "y = " ++ show y
+     return (x, y)
+#+end_src
+
+* pipe examples
+** read-print loop
+
+https://github.com/Gabriel439/Haskell-RCPL-Library/blob/master/RCPL.hs
+
+* pipes tutorial
+
+I'm just going through the pipes and concurrent tutorial and thought I'd share
+my raw notes. Maybe I think in an idiomatic way due to idiomatic gaps in
+haskell learn me's (my type fu is particularly poor). I was going to send to
+the mailing list but I got too confused and thought it best not to pollute it.
+
+** `for` and ~>
+
+Trying to rewire my pipes neurons I thought to start with trying to extend the
+canonical example to allow a second bite at the stream:
+
+Attempt 1
+
+λ> run (for (each [1..5]) $ (lift . print . (2 *)) ~> lift . print)
+2
+4
+6
+8
+10
+
+theEffect ~> Anything = theEffect ???
+
+
+
+** >~
+
+Effect >~ Consumer = Effect right? So I should be able to add a Consmer to the
+back of the Effect to do something else (not needing tee say)
+
+Thus,
+
+λ> :t for (each [1..5]) $ (lift . print . (2 *)) >~ (lift . print)
+
+Which didn't type well at all.
+
+I was surpised that lift . print wasn't a Consumer. It can be a consumer sometimes:
+
+λ> :t tee . lift . print
+tee . lift . print :: Show a => a -> Pipe a1 a1 IO ()
+
+** Rolling my own Consumer
+
+With no Consumers in Pipes.Prelude, I couldn't find needed another jigsaw
+piece to try - one that doesn't include a lift.
+
+So, turning to my trusty `>->`, I tested the simplest Consumer I could think of:
+
+λ> :t forever $ await >>= (lift . print)
+forever $ await >>= (lift . print)
+  :: Show a => Proxy () a y' y IO b
+
+λ> run $ (each [1..5]) >-> (forever $ await >>= (lift . print))
+1
+2
+3
+4
+5
+
+Note that >-> was *not* the lowest precedence here so I needed brackets
+
+** >~
+
+But it didn't work when I plugged in to `>~`
+
+λ> :t run $ (for (each [1..5]) $ lift . print) >~ (forever $ await >>= (lift . print))
+run $ (for (each [1..5]) $ lift . print) >~ (forever $ await >>= (lift . print))
+  :: IO r
+
+And running this gets me an infinite loop somehow.  Cutting the forever then seems logical:
+
+λ> run $ (for (each [1..5]) $ lift . print) >~ (await >>= (lift . print))
+1
+2
+3
+4
+5
+()
+
+Is the conclusion here that for and >~ just don't mix?
+
+
+** What is an Effect?
+
+An alternative conclusion is that I'm not getting what an Effect is. Tutorial says:
+
+Effects are completely self-contained: nothing goes in or out
+
+But type signatures say you can combine just about any old thing into an Effect; you can
+shove a Producer in (using for) and that turns it into another Effect, and shoving a Pipe
+in turns it into a Consumer. And a similar story for ~>.
+
+So os Effect better described as 'something that has everything you need for a
+complete run'?
+
+Also, lift makes things Proxy's and run unProxy Effects (and you can only unProxy
+proxies if they're Effects). Is run, then, the opposite of a lift?
+
+
+** lift bingo
+
+type debugging is hard given a lift in there:
+
+let's say the coder is trying to compose:
+
+λ> :t for (each [1..10]) $ lift . print
+for (each [1..10]) $ lift . print :: Proxy x' x c' c IO ()
+
+but puts a '$' instead of a `.` (common mistake from pattern matching other code snippets)
+
+λ> :t for (each [1..10]) $ lift $ print
+
+<interactive>:1:22-33:
+    Couldn't match type `IO ()' with `Proxy x'0 x0 c'0 c0 m0 b'0'
+    Expected type: (->) a0 -> Proxy x'0 x0 c'0 c0 m0 b'0
+      Actual type: (->) a0 -> IO ()
+    In the second argument of `($)', namely `lift $ print'
+    In the expression: for (each [1 .. 10]) $ lift $ print
+
+But lift should have turned print into a proxy at least???
+
+The components seems ok because lift $ print types at least:
+
+λ> :t for (each [1..10])
+for (each [1..10])
+  :: (Enum b, Monad m, Num b) =>
+     (b -> Proxy x' x c' c m b') -> Proxy x' x c' c m ()
+λ> :t lift $ print
+lift $ print :: (Show a, MonadTrans t) => t ((->) a) (IO ())
+
+It's only on contemplating what the heck ((->) a) is that you can work back to the problem, and since there are all sorts of new type combos in pipes, it can be difficult to spot.
+
+λ> :t lift . print
+lift . print :: (Show a, MonadTrans t) => a -> t IO ()
+
+** polymorphism is hidden (Producers don't type as Producers)
+
+ok, so I take the canonical Effect in the tutorial:
+
+λ> :t for (each [1..10]) $ lift . print
+for (each [1..10]) $ lift . print :: Proxy x' x c' c IO ()
+
+This is confusing.  I expected a Proxy X () () X IO () but nothing is closed off
+
+And trying to work out what's what by type deconstruction doesn't help:
+
+λ> :t each
+each :: (Monad m, Foldable f) => f a -> Proxy x' x y' a m ()
+λ> :i Producer
+type Producer b = Proxy X () () b 	-- Defined in `Pipes.Core'
+
+Digging in to `each`, you might notice it makes a Producer' rather than a Producer
+
+λ> :i Producer'
+
+Top level: Not in scope: data constructor Producer'
+
+And finally:
+
+λ> import Pipes.Core
+λ> :i Producer'
+type Producer' b m r = Proxy x' x y' b m r
+  	-- Defined in `Pipes.Core'
+
+
+So now, I have this nailed to the screen:
+
+Effect       = Proxy X () () X  or  Proxy x' x y' y
+Producer b   = Proxy X () () b  or  Proxy x' x y' b
+-- Consumer a   = Proxy () a () X  or  Proxy () a y' y 
+Pipe     a b = Proxy () a () b  or  ??? (aside: why not Pipes' ???)
+
+
+** Canonical deconstruction
+
+It's very hard untraining yourself from Producer >-> Consumer
+
+"You might wonder why the body of a for loop can be a Producer." I wonder more
+how a consumer-like putStrLn is exactly?
+
+Producer:                              each [1..5]
+for + Producer  = Producer or Effect: for (each [1..5])
+lift + anything = XYZ:                                    lift . print
+Producer + XYZ  = ZYX:                for (each [1..5]) $ lift . print
+
+It's more working backwards that's tough. ZYX must be an Effect (because you
+can run it), so XYZ must be an Effect (by inspection of the for definition)
+
+** "consume"
+
+Use yield to build Producers and (~>) / for to consume Producers. 
+Use await to build Consumers and (>~) to feed Consumers. 
+
+"consume" is confusing here.  "process"?  
+
+
+
+
+
+
+* streaming folds
+
+#+begin_src haskell
+{-# LANGUAGE ExistentialQuantification #-}
+
+import Control.Applicative
+import Data.List (foldl')
+import Data.Monoid
+import Data.Strict.Tuple
+import Prelude hiding (sum, length)
+
+data Fold a b = forall w.  (Monoid w) => Fold
+    { tally   :: a -> w
+    , compute :: w -> b
+    }
+
+fold :: Fold a b -> [a] -> b
+fold (Fold t c) xs =
+    c (foldl' mappend mempty (map t xs))
+
+instance (Monoid a, Monoid b) => Monoid (Pair a b) where
+    mempty = (mempty :!: mempty)
+    mappend (aL :!: aR) (bL :!: bR) =
+        (mappend aL bL :!: mappend aR bR)
+
+instance Functor (Fold a) where
+    fmap f (Fold t k) = Fold t (f . k)
+
+instance Applicative (Fold a) where
+    pure a    = Fold (\_ -> ()) (\_ -> a)
+    (Fold tL cL) <*> (Fold tR cR) =
+        let t x = (tL x :!: tR x)
+            c (wL :!: wR) = (cL wL) (cR wR)
+        in  Fold t c
+
+genericLength :: (Num b) => Fold a b
+genericLength =
+    Fold (\_ -> Sum (1::Int)) (fromIntegral . getSum)
+
+sum :: (Num a) => Fold a a
+sum = Fold Sum getSum
+
+sumSq :: (Num a) => Fold a a
+sumSq = Fold (\x -> Sum (x ^ 2)) getSum
+
+average :: (Fractional a) => Fold a a
+average = (\s c -> s / c) <$> sum <*> genericLength
+
+product :: (Num a) => Fold a a
+product = Fold Product getProduct
+
+std :: (Floating a) => Fold a a
+std =  (\ss s len -> sqrt (ss / len - (s / len)^2))
+    <$> sumSq
+    <*> sum
+    <*> genericLength
+#+end_src
+
+
+

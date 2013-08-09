@@ -1,0 +1,16 @@
+[submodule "deps/pipes"]
+	path = deps/pipes
+	url = https://github.com/Gabriel439/Haskell-Pipes-Library.git
+	branch = master
+[submodule "deps/pipes-safe"]
+	path = deps/pipes-safe
+	url = https://github.com/Gabriel439/Haskell-Pipes-Safe-Library.git
+	branch = master
+[submodule "deps/pipes-concurrency"]
+	path = deps/pipes-concurrency
+	url = https://github.com/Gabriel439/Haskell-Pipes-Concurrency-Library.git
+	branch = 4.0.0
+[submodule "deps/pipes-network"]
+	path = deps/pipes-network
+	url = https://github.com/k0001/pipes-network.git
+	branch = pipes-4.0

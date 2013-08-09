@@ -1,0 +1,33 @@
+name:                     pipes-ecosystem
+version:                  0.1
+synopsis:                 pipes sandpit
+author:                   Tony Day
+maintainer:               tonyday567@gmail.com
+category:                 Test
+build-type:               Simple
+stability:                Experimental
+cabal-version:            >= 1.10
+extra-source-files:       Readme.md
+description:              Just a sandpit
+source-repository         head
+  type:                   git
+  location:               git://github.com/tonyday567/pipes-ecosystem.git
+ 
+executable test-network
+  main-is:                test-network.hs
+  default-language:       Haskell2010
+  ghc-options:            -Wall -Werror -O2 -threaded
+  hs-source-dirs:         test, src
+  build-depends:          base
+                        , HUnit
+                        , QuickCheck
+                        , test-framework
+                        , test-framework-hunit
+                        , bytestring >= 0.10.0.2
+                        , network >= 2.4.1.2
+                        , network-simple >= 0.2.1.0
+                        , transformers >= 0.3.0.0
+                        , pipes >= 4.0.0
+                        , pipes-safe >= 2.0.0
+                        , pipes-concurrency >= 2.0.0
+                        , pipes-network >= 0.6.0.0

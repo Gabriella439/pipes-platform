@@ -1,0 +1,11 @@
+language: haskell
+before_install:
+  - git submodule update --init --recursive
+  - cabal install deps/pipes
+  - cabal install deps/pipes-safe
+  - cabal install deps/pipes-concurrency
+  - cabal install deps/pipes-network
+
+notifications:
+  email:
+    - tonyday567@gmail.com

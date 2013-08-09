@@ -23,7 +23,7 @@ executable test-network
                         , QuickCheck
                         , test-framework
                         , test-framework-hunit
-                        , bytestring >= 0.10.0.2
+                        , bytestring >= 0.9.2.1
                         , network >= 2.4.1.2
                         , network-simple >= 0.2.1.0
                         , transformers >= 0.3.0.0

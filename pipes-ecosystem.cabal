@@ -12,7 +12,7 @@ description:              Just a sandpit
 source-repository         head
   type:                   git
   location:               git://github.com/tonyday567/pipes-ecosystem.git
- 
+
 executable test-network
   main-is:                test-network.hs
   default-language:       Haskell2010
@@ -28,7 +28,9 @@ executable test-network
                         , network-simple >= 0.2.1.0
                         , transformers >=0.2
                         , pipes >= 4.0.0
+                        , pipes-parse >= 2.0.0
                         , pipes-safe >= 2.0.0
                         , pipes-concurrency >= 2.0.0
                         , pipes-network >= 0.6.0.0
                         , pipes-vector >= 0.4.0.0
+                        , pipes-attoparsec >= 0.3.0

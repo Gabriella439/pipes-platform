@@ -5,6 +5,7 @@ before_install:
   - cabal install deps/pipes-safe
   - cabal install deps/pipes-concurrency
   - cabal install deps/pipes-network
+  - cabal install deps/pipes-vector
 
 notifications:
   email:

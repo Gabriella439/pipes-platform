@@ -18,7 +18,7 @@ import qualified Data.ByteString.Char8 as C
 
 import qualified Network.Simple.TCP as NST
 import qualified Network.Socket as NS
-    (ServiceName, setSocketOption, SocketOption(..), Socket, SockAddr, sClose)
+    (ServiceName, Socket, SockAddr, sClose)
 import           Pipes
 import           Pipes.Concurrent
 import           Pipes.Network.TCP
@@ -27,10 +27,11 @@ import           Pipes.Network.TCP
 host1p = NST.Host "127.0.0.1"
 port  = show 35660
 
+logger = putStrLn
+
 server :: NST.HostPreference -> NS.ServiceName -> IO ()
 server hp p = NST.serve hp p $ \(sock, _laddr) -> do
-    putStrLn "TCP server up"
-    NS.setSocketOption sock NS.ReuseAddr 1
+    logger "TCP server up"
     run (fromSocket sock 4096 >-> toSocket sock)
 
 -- event, state
@@ -44,8 +45,6 @@ data Event = Connect     -- initially connect to port
 
 help :: IO ()
 help = putStrLn "(c)onnect (q)uit (r)eceive (s)end"
-
-logger = putStrLn
 
 -- keypress events
 user :: IO Event
@@ -76,7 +75,7 @@ handler = forever $ do
                         put $ Just hp
             Quit -> do
                 h <- get
-                lift . lift $ logger "Is this the right wat to quit?"
+                lift . lift $ logger "Is this the right way to quit?"
                 case h of
                     Nothing -> return ()
                     Just hp -> lift . lift $ NS.sClose $ fst hp

@@ -31,3 +31,4 @@ executable test-network
                         , pipes-safe >= 2.0.0
                         , pipes-concurrency >= 2.0.0
                         , pipes-network >= 0.6.0.0
+                        , pipes-vector >= 0.4.0.0

@@ -1,0 +1,6 @@
+./
+https://github.com/Gabriel439/Haskell-Pipes-Library.git master
+https://github.com/Gabriel439/Haskell-Pipes-Safe-Library.git master
+https://github.com/Gabriel439/Haskell-Pipes-Concurrency-Library.git 4.0.0
+https://github.com/k0001/pipes-network.git pipes-4.0
+https://github.com/bgamari/pipes-vector.git master

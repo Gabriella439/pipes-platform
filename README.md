@@ -9,6 +9,8 @@ A trello board is also available that (attempts) to track commits across the eco
 
 https://trello.com/b/18zh1T6U/pipes
 
+## travis
+
 To add a library to this repo:
 
 0. With a fresh fork ...
@@ -34,3 +36,10 @@ On committing a pull request, travis will then install all the non-standard non-
 
 Feel free to add anything else in the test directory - crumbs, snippets that look at interactions between libraries - whatever you think might be helpful.
 
+## cabal-meta
+
+A sources.txt is maintained so all packages can be installed with:
+
+    cabal-meta install
+    
+    

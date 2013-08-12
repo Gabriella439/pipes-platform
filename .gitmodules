@@ -2,6 +2,10 @@
 	path = deps/pipes
 	url = https://github.com/Gabriel439/Haskell-Pipes-Library.git
 	branch = master
+[submodule "deps/pipes-parse"]
+	path = deps/pipes-parse
+	url = https://github.com/Gabriel439/Haskell-Pipes-Parse-Library.git
+	branch = master
 [submodule "deps/pipes-safe"]
 	path = deps/pipes-safe
 	url = https://github.com/Gabriel439/Haskell-Pipes-Safe-Library.git
@@ -18,3 +22,7 @@
 	path = deps/pipes-vector
 	url = https://github.com/bgamari/pipes-vector.git
 	branch = master
+[submodule "deps/pipes-attoparsec"]
+	path = deps/pipes-attoparsec
+	url = https://github.com/k0001/pipes-attoparsec.git
+	branch = pipes-4.0

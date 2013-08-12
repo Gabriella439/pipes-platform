@@ -2,10 +2,12 @@ language: haskell
 before_install:
   - git submodule update --init --recursive
   - cabal install deps/pipes
+  - cabal install deps/pipes-parse
   - cabal install deps/pipes-safe
   - cabal install deps/pipes-concurrency
   - cabal install deps/pipes-network
   - cabal install deps/pipes-vector
+  - cabal install deps/pipes-attoparsec
 
 notifications:
   email:

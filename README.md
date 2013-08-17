@@ -1,7 +1,7 @@
 pipes-platform
 ===============
 
-https://secure.travis-ci.org/Gabriel439/pipes-platform.png
+[![Build Status](https://travis-ci.org/Gabriel439/pipes-platform.png)](https://travis-ci.org/Gabriel439/pipes-platform)
 
 The haskell pipes platform
 

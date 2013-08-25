@@ -101,7 +101,6 @@ The approximate work-flow goes something like this:
 
 4. send a pull request
 
-
 ## hot fix
 
 To quickly test and fix a travis-ci fail

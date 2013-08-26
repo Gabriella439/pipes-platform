@@ -13,7 +13,7 @@
 [submodule "deps/pipes-concurrency"]
 	path = deps/pipes-concurrency
 	url = https://github.com/Gabriel439/Haskell-Pipes-Concurrency-Library.git
-	branch = 4.0.0
+	branch = master
 [submodule "deps/pipes-network"]
 	path = deps/pipes-network
 	url = https://github.com/k0001/pipes-network.git

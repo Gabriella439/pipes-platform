@@ -31,10 +31,10 @@ executable test-network
                         , network >=0.2.1
                         , network-simple >= 0.2.1.0
                         , transformers >=0.2
-                        , pipes >= 4.0.0
+                        , pipes >= 4.0
                         , pipes-parse >= 2.0.0
                         , pipes-safe >= 2.0.0
                         , pipes-concurrency >= 2.0.0
-                        , pipes-network >= 0.6.0.0
-                        , pipes-vector >= 0.4.0.0
+                        , pipes-network >= 0.6.0
+                        , pipes-vector >= 0.4.0
                         , pipes-attoparsec >= 0.3.0

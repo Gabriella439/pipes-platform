@@ -17,7 +17,7 @@
 [submodule "deps/pipes-network"]
 	path = deps/pipes-network
 	url = https://github.com/k0001/pipes-network.git
-	branch = pipes-4.0
+	branch = master
 [submodule "deps/pipes-vector"]
 	path = deps/pipes-vector
 	url = https://github.com/bgamari/pipes-vector.git
@@ -25,4 +25,4 @@
 [submodule "deps/pipes-attoparsec"]
 	path = deps/pipes-attoparsec
 	url = https://github.com/k0001/pipes-attoparsec.git
-	branch = pipes-4.0
+	branch = master

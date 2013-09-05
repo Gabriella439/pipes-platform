@@ -82,14 +82,14 @@ The approximate work-flow goes something like this:
 1. Start with a fresh fork and new branch
   
 2. swap out the submodule reference by editing .submodule like so:
-  
+     ```
         [submodule "deps/pipes-vector"]
       	path = deps/pipes-vector
      -	url = https://github.com/bgamari/pipes-vector.git
      -	branch = master
      +	url = https://github.com/tonyday567/pipes-vector.git
      +	branch = dep-fix  
-
+     ```
 3. sync this change
 
      ```

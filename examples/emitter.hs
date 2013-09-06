@@ -41,7 +41,6 @@ ui = loop
                 help
                 loop
 
-
 -- simulation
 seed      = 42  -- random seed
 maxStream = 1000  -- maximum number of random values

@@ -26,3 +26,90 @@
 	path = deps/pipes-attoparsec
 	url = https://github.com/k0001/pipes-attoparsec.git
 	branch = master
+[submodule "deps/pipes-rt"]
+	path = deps/pipes-rt
+	url = https://github.com/ImAlsoGreg/pipes-rt.git
+[submodule "deps/pipes-bytestring"]
+	path = deps/pipes-bytestring
+	url = https://github.com/Gabriel439/Haskell-Pipes-ByteString-Library.git
+[submodule "deps/rcpl"]
+	path = deps/rcpl
+	url = https://github.com/Gabriel439/Haskell-RCPL-Library.git
+[submodule "deps/dirstream"]
+	path = deps/dirstream
+	url = https://github.com/Gabriel439/Haskell-DirStream-Library.git
+[submodule "deps/pipes-csv"]
+	path = deps/pipes-csv
+	url = https://github.com/jb55/pipes-csv.git
+[submodule "deps/pipes-postgresql-simple"]
+	path = deps/pipes-postgresql-simple
+	url = https://github.com/ocharles/pipes-postgresql-simple.git
+[submodule "deps/pipes-web"]
+	path = deps/pipes-web
+	url = https://github.com/Gabriel439/pipes-web.git
+[submodule "deps/pipes-zlib"]
+	path = deps/pipes-zlib
+	url = https://github.com/k0001/pipes-zlib.git
+[submodule "deps/pipes-random"]
+	path = deps/pipes-random
+	url = https://github.com/ocharles/pipes-random.git
+[submodule "deps/pipes-tar"]
+	path = deps/pipes-tar
+	url = https://github.com/ocharles/pipes-tar.git
+[submodule "deps/text-pipes"]
+	path = deps/text-pipes
+	url = https://github.com/michaelt/text-pipes.git
+[submodule "deps/pipes-text"]
+	path = deps/pipes-text
+	url = https://github.com/ibotty/pipes-text.git
+[submodule "deps/pipes-interleave"]
+	path = deps/pipes-interleave
+	url = https://github.com/bgamari/pipes-interleave.git
+[submodule "deps/pipes-fastcgi"]
+	path = deps/pipes-fastcgi
+	url = https://github.com/mbrock/pipes-fastcgi.git
+[submodule "deps/pipes-process"]
+	path = deps/pipes-process
+	url = https://github.com/stepcut/pipes-process.git
+[submodule "deps/pipes-listt"]
+	path = deps/pipes-listt
+	url = https://github.com/michaelt/pipes-listt.git
+[submodule "deps/pipes-listt-stream"]
+	path = deps/pipes-listt-stream
+	url = https://github.com/michaelt/pipes-listt-stream.git
+[submodule "deps/pipes-http"]
+	path = deps/pipes-http
+	url = https://github.com/afcowie/pipes-http.git
+[submodule "deps/pipes-aeson"]
+	path = deps/pipes-aeson
+	url = https://github.com/k0001/pipes-aeson.git
+[submodule "deps/pipes-gremlin"]
+	path = deps/pipes-gremlin
+	url = https://github.com/phischu/pipes-gremlin.git
+[submodule "deps/pipes-websockets"]
+	path = deps/pipes-websockets
+	url = https://github.com/ixmatus/pipes-websockets.git
+[submodule "deps/pipes-binary"]
+	path = deps/pipes-binary
+	url = https://github.com/k0001/pipes-binary.git
+[submodule "deps/pipes-zmq3"]
+	path = deps/pipes-zmq3
+	url = https://github.com/PierreR/pipes-zmq3.git
+[submodule "deps/pipes-http-message"]
+	path = deps/pipes-http-message
+	url = https://github.com/k0001/pipes-http-message.git
+[submodule "deps/pipes-network-tls"]
+	path = deps/pipes-network-tls
+	url = https://github.com/k0001/pipes-network-tls.git
+[submodule "deps/pipes-cereal-plus"]
+	path = deps/pipes-cereal-plus
+	url = https://github.com/nikita-volkov/pipes-cereal-plus.git
+[submodule "deps/pipes-emitter"]
+	path = deps/pipes-emitter
+	url = https://github.com/tonyday567/pipes-emitter.git
+[submodule "deps/mygox"]
+	path = deps/mygox
+	url = https://github.com/RobinKrom/Mtgox.git
+[submodule "deps/amoeba"]
+	path = deps/amoeba
+	url = https://github.com/quchen/amoeba.git

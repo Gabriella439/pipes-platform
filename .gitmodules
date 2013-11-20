@@ -107,8 +107,8 @@
 [submodule "deps/pipes-emitter"]
 	path = deps/pipes-emitter
 	url = https://github.com/tonyday567/pipes-emitter.git
-[submodule "deps/mygox"]
-	path = deps/mygox
+[submodule "deps/mtgox"]
+	path = deps/mtgox
 	url = https://github.com/RobinKrom/Mtgox.git
 [submodule "deps/amoeba"]
 	path = deps/amoeba
